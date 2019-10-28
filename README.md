@@ -1,2 +1,1 @@
-# USP-ICMC
-# USP-ICMC
+Codigos dos exercicios feitos na materias do icmc
