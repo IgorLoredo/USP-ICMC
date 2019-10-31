@@ -2,25 +2,22 @@
 #define maze_h
 
 
+
 struct grafo{
-    int ponto;
-    int aberto;
-    int visitado;
-    int camara;
-    struct grafo **prox;
+    float x,y;
+    char a;;
+    int vistado;
+    struct grafo **no;
 };
 
-struct pilha{
-    struct grato **pilha;
-    int tam;
+struct lab{
+    int Npontos,Ncamaras,Nsegmentos;
+    struct grafo **vet;
 };
 
 typedef struct grafo GRAFO;
-typedef struct pilha pilha_grafo;
+typedef struct lab LAB;
 
-// pilha e operações
-pilha_grafo *new_pilha();
-
-GRAFO *iniciarGrafo(int,int); // vet,aberto
+LAB *iniciar_lab(int);
 
 #endif
