@@ -7,26 +7,27 @@
 
 
 struct esparsaElem{
-    int col,lin;
-    int elem;
-    struct esparsaElem *colProx,*linProx;
+    int col,lin;                    // linha e coluna 
+    int elem;                       // guarda elemento
+    struct esparsaElem *colProx,*linProx; // ponteiro para o proxino elemento
 };
 
-
 struct esparsaMatriz{
-    int constante;
-    int ncol,nlin;
-    struct esparsaElem **col,**lin;
+    int constante; // contante da matriz 
+    int ncol,nlin; // quantidade maxima de linhas e colunas 
+    struct esparsaElem **col,**lin; /// guarda os pronteiros para linhas e colunas
 };
 
 typedef struct esparsaElem ESPARSA_ELEM;
 typedef struct esparsaMatriz ESPARSA_MATRIZ;
 
+// operação basicas
+ESPARSA_MATRIZ *criarMatriz(int,int,int); // criar matriz
+int addMatriz(ESPARSA_MATRIZ*,int,int,int);// elementos
+int getMatriz(ESPARSA_MATRIZ*,int,int); // dar get em um elemento da matriz
+int freeMatriz(ESPARSA_MATRIZ*); // dar free na matriz
+ESPARSA_MATRIZ* somaMatriz(ESPARSA_MATRIZ*,ESPARSA_MATRIZ*);
 
-ESPARSA_MATRIZ *criarMatriz(int,int,int);
-int addMatriz(ESPARSA_MATRIZ*,int,int,int);
-int remover(ESPARSA_MATRIZ*,int,int);
 
-int getMatriz(ESPARSA_MATRIZ*,int,int);
-int freeMatriz(ESPARSA_MATRIZ*);
+void imprimir_matriz(ESPARSA_MATRIZ *);
 #endif
