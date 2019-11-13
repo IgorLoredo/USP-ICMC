@@ -1,4 +1,4 @@
 all:
-	@gcc -o esparsa esparsa.c main.c -lm -I.
+	@gcc -o exe main.c esparsa.c -lm -I.
 run:
-	@./esparsa
+	@./exe

@@ -1,25 +1,32 @@
-#ifdef esparsa_h
-#define esparsa_h
+#ifndef _esparsa_h_
+#define esparsa_h_
 
-#define SUCCESS 0
+#define SUCESSO 0
+#define ERRO_MATRIZ -1
+#define ERRO_POS -2
 
-struct esparsa_elem{
+
+struct esparsaElem{
     int col,lin;
     int elem;
-    struct esparsa_elem *colProx,*linProx;
+    struct esparsaElem *colProx,*linProx;
 };
-struct esparsa_matriz{
+
+
+struct esparsaMatriz{
     int constante;
     int ncol,nlin;
-    struct esparsa_elem **col,**lin;
+    struct esparsaElem **col,**lin;
 };
 
-typedef struct esparsa_elem ESPARSA_ELEM;
-typedef struct esparsa_matriz ESPARSA_MATRIZ;
+typedef struct esparsaElem ESPARSA_ELEM;
+typedef struct esparsaMatriz ESPARSA_MATRIZ;
 
-ESPARSA_MATRIZ *criarMatriz(int,int);
+
+ESPARSA_MATRIZ *criarMatriz(int,int,int);
 int addMatriz(ESPARSA_MATRIZ*,int,int,int);
 int remover(ESPARSA_MATRIZ*,int,int);
 
-int apagarMatriz(ESPARSA_MATRIZ*);
+int getMatriz(ESPARSA_MATRIZ*,int,int);
+int freeMatriz(ESPARSA_MATRIZ*);
 #endif

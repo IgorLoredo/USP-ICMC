@@ -1,6 +1,7 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>
+#include<huffman.h>
 
 //Include de TAD’s particulares
 
@@ -10,13 +11,13 @@ char text[10001],
         textCompac[10001]
         ,textDescompac[10001];
 
- TABELAHUFFMAN ∗tabela= criarTabelaHuffman () ; // c r i a a t a b el a de huffman
+ TABELAHUFFMAN ∗tabela= criarTabelaHuffman(); // c r i a a t a b el a de huffman
 // le o texto que sera compactado
 
 for(i=0;(text[i] = getchar()) != '\n' && i < 10001;++i);
     text[i] = '\0';
 // compacta o texto e modifica a tabela
-textCompac = compactarHuffman (text, &tabela);
+textCompac = compactarHuffman(text,&tabela);
  //descompactao texto baseado na tabela criada
 textDescompac = descompactarHuffman(textCompac,tabela);
 

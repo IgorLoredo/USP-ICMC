@@ -12,4 +12,9 @@ struct node{
 typedef struct node NODE;
 
 
+//TABELAHUFFMAN *criarTabelaHuffman();
+//compactarHuffman(text,&tabela);
+//descompactarHuffman(textCompac,tabela);
+//liberarTabelaHuffman(&tabela);
+
 #endif
