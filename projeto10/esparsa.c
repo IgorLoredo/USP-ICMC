@@ -75,4 +75,5 @@ int freeMatriz(ESPARSA_MATRIZ *matriz) {
 	free(matriz->lin);
 	free(matriz->col);
 	free(matriz);
+    return SUCESSO;
 }
