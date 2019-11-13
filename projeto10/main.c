@@ -28,7 +28,7 @@ int main(){
    // imprimir_matriz(matriz2);
     if(op== 'A'){
         ESPARSA_MATRIZ *Soma = somaMatriz(matriz1,matriz2);
-        imprimir_matriz(Soma);
+       // imprimir_matriz(Soma);
     }
    // freeMatriz(matriz1); // free em tudo
     //freeMatriz(matriz2);
