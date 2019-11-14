@@ -5,6 +5,9 @@
 #define ERRO_MATRIZ -1
 #define ERRO_POS -2
 
+#define primo 10597 // ver se poder colocar hash
+
+
 
 struct esparsaElem{
     int col,lin;                    // linha e coluna 
@@ -26,8 +29,9 @@ ESPARSA_MATRIZ *criarMatriz(int,int,int); // criar matriz
 int addMatriz(ESPARSA_MATRIZ*,int,int,int);// elementos
 int getMatriz(ESPARSA_MATRIZ*,int,int); // dar get em um elemento da matriz
 int freeMatriz(ESPARSA_MATRIZ*); // dar free na matriz
-ESPARSA_MATRIZ* somaMatriz(ESPARSA_MATRIZ*,ESPARSA_MATRIZ*);
 
+ESPARSA_MATRIZ* somaMatriz(ESPARSA_MATRIZ*,ESPARSA_MATRIZ*);
+ESPARSA_MATRIZ* multMatriz(ESPARSA_MATRIZ*,ESPARSA_MATRIZ*);
 
 void imprimir_matriz(ESPARSA_MATRIZ *);
 #endif

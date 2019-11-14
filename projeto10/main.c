@@ -27,10 +27,16 @@ int main(){
    // imprimir_matriz(matriz1);
    // imprimir_matriz(matriz2);
     if(op== 'A'){
-        ESPARSA_MATRIZ *Soma = somaMatriz(matriz1,matriz2);
-       // imprimir_matriz(Soma);
+        ESPARSA_MATRIZ *result = somaMatriz(matriz1,matriz2);
+       imprimir_matriz(result);
+       freeMatriz(result);
+    }else if(op == 'M'){
+        ESPARSA_MATRIZ *result = multMatriz(matriz1,matriz2);
+        freeMatriz(result);   
     }
-   // freeMatriz(matriz1); // free em tudo
-    //freeMatriz(matriz2);
+        
+    freeMatriz(matriz1); // free em tudo
+    freeMatriz(matriz2);
+    //freeMatriz(result);
     return 0;
 }

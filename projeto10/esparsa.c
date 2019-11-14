@@ -65,7 +65,7 @@ int freeMatriz(ESPARSA_MATRIZ *matriz) {
 
 	for (i = 0; i < matriz->nlin; i++) {
 		while (p = matriz->lin[i]) {
-		    matriz->lin[i] = p->linProx;
+		    matriz->lin[i] = p->colProx;
 			free(p);
 		}
 	}
@@ -89,9 +89,9 @@ void imprimir_matriz(ESPARSA_MATRIZ *matriz) {
 
 ESPARSA_MATRIZ* somaMatriz(ESPARSA_MATRIZ*A,ESPARSA_MATRIZ*B){
     if(!A || !B) return NULL;
-    ESPARSA_MATRIZ*new = criarMatriz(A->nlin,A->ncol,0);
+    ESPARSA_MATRIZ *new = criarMatriz(A->nlin,A->ncol,0);
     int i,j,soma,a ,b;
-    /*for(i=0;i<A->nlin;i++){
+    for(i=0;i<A->nlin;i++){
         for(j=0;j<A->ncol;j++){
             a = getMatriz(A,i,j);
             b =getMatriz(B,i,j);
@@ -99,39 +99,47 @@ ESPARSA_MATRIZ* somaMatriz(ESPARSA_MATRIZ*A,ESPARSA_MATRIZ*B){
             soma  = a + b;
              addMatriz(new,i,j,soma);
         }
-    } */
-    ESPARSA_ELEM **auxA,**auxB;
+    } 
+    /*ESPARSA_ELEM **auxA,**auxB;
      for (i = 0; i < A->nlin; i++) {
          auxA = &A->lin[i];
          auxB = &B->lin[i];
-   
-         /*while((*auxA)->colProx != NULL && (*auxB)->colProx != NULL ){
-             printf("aqui\n");
-           if(*auxA !=NULL && *auxB != NULL){ // se existir os dois elementos
-                if((*auxA)->col == (*auxB)->col){ // caso tiver na mesma coluna
-                     printf("aqui\n");
-                    j = (*auxA)->col;
-                    a = getMatriz(A,i,j);
-                    b =getMatriz(B,i,j);
-                    soma  = a + b;
-                    addMatriz(new,i,j,soma); 
-                }
-                else if((*auxA)->col < (*auxB)->col){ // caso a coluna do a for menor que a do b
+        if(auxA && auxB){
+            while((*auxA)->colProx != NULL && (*auxB)->colProx != NULL ){
+                printf("aqui\n");
+             if(*auxA !=NULL && *auxB != NULL){ // se existir os dois elementos
+                    if((*auxA)->col == (*auxB)->col){ // caso tiver na mesma coluna
+                        printf("aqui\n");
+                        j = (*auxA)->col;
+                        a = getMatriz(A,i,j);
+                        b =getMatriz(B,i,j);
+                        soma  = a + b;
+                        addMatriz(new,i,j,soma); 
+                    }
+                    else if((*auxA)->col < (*auxB)->col){ // caso a coluna do a for menor que a do b
+                        addMatriz(new,i,(*auxA)->col,(*auxA)->elem);
+                    }else if((*auxA)->col > (*auxB)->col) // caso a coluna b for menor que a
+                        addMatriz(new,i,(*auxB)->col,(*auxB)->elem); //
+
+                }else if((*auxA) && !(*auxB)) // caso a exista e b 
                     addMatriz(new,i,(*auxA)->col,(*auxA)->elem);
-                }else if((*auxA)->col > (*auxB)->col) // caso a coluna b for menor que a
-                    addMatriz(new,i,(*auxB)->col,(*auxB)->elem); //
+                else if(!(*auxA) && (*auxB))
+                    addMatriz(new,i,(*auxB)->col,(*auxB)->elem);   
+            
+                //auxA = &(*auxA)->colProx;
+                //auxB = &(*auxB)->colProx;
+            }
 
-            }else if((*auxA) && !(*auxB)) // caso a exista e b 
-                addMatriz(new,i,(*auxA)->col,(*auxA)->elem);
-            else if(!(*auxA) && (*auxB))
-                addMatriz(new,i,(*auxB)->col,(*auxB)->elem);  
-        
-            //auxA = &(*auxA)->colProx;
-            //auxB = &(*auxB)->colProx;
-        }*/
+        } 
+    }*/
 
-    } 
+    return new;
+}
 
+
+ESPARSA_MATRIZ* multMatriz(ESPARSA_MATRIZ* A,ESPARSA_MATRIZ*B){
+    int i,j,somaprod;
+    ESPARSA_MATRIZ* new = criarMatriz(A->nlin,B->ncol,0);
 
     return new;
 }
