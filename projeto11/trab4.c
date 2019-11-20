@@ -6,16 +6,15 @@
 //Include de TAD’s particulares
 
 int main(int argc,char∗argv[]){
-int i;
-char text[10001],
-        textCompac[10001]
-        ,textDescompac[10001];
+int i; 
+char text[10001],textCompac[10001],textDescompac[10001];
 
- TABELAHUFFMAN ∗tabela= criarTabelaHuffman(); // c r i a a t a b el a de huffman
+ TABELAHUFFMAN ∗tabela= criarTabelaHuffman(); // cria a tabela de huffman
 // le o texto que sera compactado
 
 for(i=0;(text[i] = getchar()) != '\n' && i < 10001;++i);
     text[i] = '\0';
+    
 // compacta o texto e modifica a tabela
 textCompac = compactarHuffman(text,&tabela);
  //descompactao texto baseado na tabela criada

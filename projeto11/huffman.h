@@ -4,14 +4,20 @@
 typedef unsigned char byte; // vai de 0 a 255
 
 struct node{
-    int valor;
-    byte codigo;
-    struct node *esq *dir;
+    char letra;
+    int freq;
+    struct node *esq, *dir;
 };
-
+struct TREE{
+    struct node *raiz;
+    int tam;
+};
 typedef struct node NODE;
+typedef struct TREE treeHuffamn;
 
-
+treeHuffamn *criarHuffman(int);
+//int criarAvore();
+NODE **criarfolhas(char *, int *);
 //TABELAHUFFMAN *criarTabelaHuffman();
 //compactarHuffman(text,&tabela);
 //descompactarHuffman(textCompac,tabela);

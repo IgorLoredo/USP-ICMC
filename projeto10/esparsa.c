@@ -107,18 +107,19 @@ ESPARSA_MATRIZ* somaMatriz(ESPARSA_MATRIZ*A,ESPARSA_MATRIZ*B){
      for (i = 0; i < A->nlin; i++) {
          auxA = &A->lin[i];
          auxB = &B->lin[i];
-
+        //printf("linha %d   elemento %d  coluna %d \n",i,(*auxA)->elem,(*auxA)->col);
         if(*auxA && *auxB){
            // printf("linha : %d\n",i);
-            while(auxA != NULL || auxB != NULL ){
+            while((*auxA) || (*auxB)){
                
-             if((*auxA) !=NULL && (*auxB) != NULL){ // se existir os dois elementos
+             if((*auxA)  && (*auxB)){ // se existir os dois elementos
                     if((*auxA)->col == (*auxB)->col){ // caso tiver na mesma coluna
                         //printf("aqui\n");
                         j = (*auxA)->col;
                         a = getMatriz(A,i,j);
                         b =getMatriz(B,i,j);
                         soma  = a + b;
+                        
                         addMatriz(new,i,j,soma); 
                     }
                     else if((*auxA)->col < (*auxB)->col){ // caso a coluna do a for menor que a do b
@@ -143,18 +144,18 @@ ESPARSA_MATRIZ* somaMatriz(ESPARSA_MATRIZ*A,ESPARSA_MATRIZ*B){
             }
 
         } else if(!(*auxA) && (*auxB)){
-            while(!auxB){
+            while((*auxB)){
                 addMatriz(new,i,(*auxB)->col,(*auxB)->elem);
                 auxB = &(*auxB)->colProx;
             }
         }else if((*auxA) && !(*auxB)){
-               while(!(*auxA)){
+               while((*auxA)){
                 addMatriz(new,i,(*auxA)->col,(*auxA)->elem);
                 auxA = &(*auxA)->colProx;
             } 
         } 
     }
-
+ 
     return new;
 }
 
