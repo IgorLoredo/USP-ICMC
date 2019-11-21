@@ -1,10 +1,17 @@
 #ifndef huffman_h
 #define huffman_h
 
-typedef unsigned char byte; // vai de 0 a 255
+// pilha
+struct pilha{
+    int *vet;
+    int cap;
+};
+typedef struct pilha PILHA;
 
+// estrutura da arvore
 struct node{
     char letra;
+    char flag;
     int freq;
     struct node *esq, *dir;
 };
@@ -15,9 +22,11 @@ struct TREE{
 typedef struct node NODE;
 typedef struct TREE treeHuffamn;
 
+
+// instruções da arvore
 treeHuffamn *criarHuffman(int);
 NODE **criarfolhas(char*, int*);
-//int criarAvore();
+NODE *criarArvore(NODE**,int);
 
 //TABELAHUFFMAN *criarTabelaHuffman();
 //compactarHuffman(text,&tabela);

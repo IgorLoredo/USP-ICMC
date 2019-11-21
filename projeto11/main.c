@@ -12,10 +12,10 @@ int main(){
         text = (char*)realloc(text,sizeof(char)*(i+2));
     
     text[i] = '\0';
+    treeHuffamn *novo = criarHuffman(strlen(text));
     printf("tamanho da palavra %d\n",i);
     int cont;
-    NODE **new = criarfolhas(text,&cont);
-    printf("%d\n",cont);
-    treeHuffamn *novo = criarHuffman(strlen(text));
+    NODE **folhas = criarfolhas(text,&cont);
+    novo->raiz = criarArvore(folhas,cont);
     return 0;
 }
