@@ -16,8 +16,9 @@ typedef struct node NODE;
 typedef struct TREE treeHuffamn;
 
 treeHuffamn *criarHuffman(int);
+NODE **criarfolhas(char*, int*);
 //int criarAvore();
-NODE **criarfolhas(char *, int *);
+
 //TABELAHUFFMAN *criarTabelaHuffman();
 //compactarHuffman(text,&tabela);
 //descompactarHuffman(textCompac,tabela);
