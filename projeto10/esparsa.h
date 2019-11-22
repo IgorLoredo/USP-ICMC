@@ -5,9 +5,6 @@
 #define ERRO_MATRIZ -1
 #define ERRO_POS -2
 
-#define primo 10597 // ver se poder colocar hash
-
-
 
 struct esparsaElem{
     int col,lin;                    // linha e coluna 

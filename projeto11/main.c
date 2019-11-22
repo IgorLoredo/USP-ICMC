@@ -12,10 +12,8 @@ int main(){
         text = (char*)realloc(text,sizeof(char)*(i+2));
     
     text[i] = '\0';
-    treeHuffamn *novo = criarHuffman(strlen(text));
-    printf("tamanho da palavra %d\n",i);
-    int cont;
-    NODE **folhas = criarfolhas(text,&cont);
-    novo->raiz = criarArvore(folhas,cont);
+    printf("%d\n",(int)strlen(text));
+    compactar(text);
+   // printf("%s\n",text);
     return 0;
 }

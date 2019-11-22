@@ -56,7 +56,7 @@ int getMatriz(ESPARSA_MATRIZ* matriz,int lin ,int col){
 	}
 
     return matriz->constante;
-} // dar get no elemento caso exista, se n retona a constante
+} // dar get no elemento caso exista, se não retona a constante
 
 int freeMatriz(ESPARSA_MATRIZ *matriz) {
 	if (!matriz) return ERRO_MATRIZ;
@@ -66,10 +66,10 @@ int freeMatriz(ESPARSA_MATRIZ *matriz) {
 	for (i = 0; i < matriz->nlin; i++) {
 		while (p = matriz->lin[i]) {
 		    matriz->lin[i] = p->colProx;
-			free(p);
+			free(p); // free no elemento
 		}
 	}
-	free(matriz->lin);
+	free(matriz->lin); // free na coluna e linha
 	free(matriz->col);
 	free(matriz);
     return SUCESSO;
@@ -92,18 +92,19 @@ ESPARSA_MATRIZ* somaMatriz(ESPARSA_MATRIZ*A,ESPARSA_MATRIZ*B){
     if(!A || !B) return NULL; 
     ESPARSA_MATRIZ*new = criarMatriz(A->nlin,A->ncol,0);
     int i,j,soma,a ,b;
-   /* for(i=0;i<A->nlin;i++){
+    for(i=0;i<A->nlin;i++){
         for(j=0;j<A->ncol;j++){
             a = getMatriz(A,i,j);
             b =getMatriz(B,i,j);
             soma  = a + b;
-            if(soma  !=0)
+            if(soma)
              addMatriz(new,i,j,soma);
         }
-    }*/
+    }
 
-    ESPARSA_ELEM **auxA,**auxB;
-     
+ ////////////// tentei fazer parte do codigo para diminuir o tempo de resposta, mas n conseguir,
+ ////////////// deixei esse trecho para avalição (se possivel) para me mostrar meu erro
+   /* ESPARSA_ELEM **auxA,**auxB;
      for (i = 0; i < A->nlin; i++) {
          auxA = &A->lin[i];
          auxB = &B->lin[i];
@@ -113,9 +114,9 @@ ESPARSA_MATRIZ* somaMatriz(ESPARSA_MATRIZ*A,ESPARSA_MATRIZ*B){
             while((*auxA) || (*auxB)){
                
              if((*auxA)  && (*auxB)){ // se existir os dois elementos
-                    if((*auxA)->col == (*auxB)->col){ // caso tiver na mesma coluna
+                    if((*auxA)->col == (*auxB)->col ){ // caso tiver na mesma coluna
                         //printf("aqui\n");
-                        j = (*auxA)->col;
+                       j = (*auxA)->col;
                         a = getMatriz(A,i,j);
                         b =getMatriz(B,i,j);
                         soma  = a + b;
@@ -154,14 +155,34 @@ ESPARSA_MATRIZ* somaMatriz(ESPARSA_MATRIZ*A,ESPARSA_MATRIZ*B){
                 auxA = &(*auxA)->colProx;
             } 
         } 
-    }
+    } */
  
     return new;
 }
 
-ESPARSA_MATRIZ* multMatriz(ESPARSA_MATRIZ* A,ESPARSA_MATRIZ*B){
-    int i,j,somaprod;
-    ESPARSA_MATRIZ* new = criarMatriz(A->nlin,B->ncol,0);
+ESPARSA_MATRIZ* multMatriz(ESPARSA_MATRIZ* A,ESPARSA_MATRIZ*B){ // nmultiplicação de matrizes
+    int i,j,somaprod=0,a;
 
+    ESPARSA_MATRIZ* new = criarMatriz(A->nlin,B->ncol,0);
+    ESPARSA_ELEM *auxA,*auxB;
+    for(j=0;j<B->ncol;j++){
+        for(i=0;i<A->nlin;i++){
+            auxA = A->lin[i];
+            //for(j=0;j<B->lin){
+               somaprod =0; 
+            while(auxA){
+                a = getMatriz(B,auxA->col,j); // pega um elemnto na posição da coluna e linha
+                if(a!=0 ) // se elçe for diferente de 0 ele soma 
+                    somaprod += auxA->elem *a;
+
+                auxA = auxA->colProx;
+            }
+            if(somaprod)
+            addMatriz(new,i,j,somaprod);
+
+            
+        }
+    }
+       // fiz desses jeito para ficar mais rapido a multiplicação
     return new;
 }
