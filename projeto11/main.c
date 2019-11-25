@@ -14,6 +14,6 @@ int main(){
     text[i] = '\0';
     printf("%d\n",(int)strlen(text));
     compactar(text);
-   // printf("%s\n",text);
+    printf("%s\n",text);
     return 0;
 }
