@@ -9,6 +9,7 @@ int main(){
 	
 	char **matSudoku = criarMat(16);
 	lerSudoku(matSudoku,16);
-	printSudoku(matSudoku,16);
+	Sudoku(matSudoku,16);
+    printSudoku(matSudoku,16);
     return 0;
 }

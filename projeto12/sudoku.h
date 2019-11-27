@@ -10,6 +10,5 @@
 char **criarMat(int);
 int lerSudoku(char**,int);
 int printSudoku(char**,int);
-
-
+int Sudoku(char **,int);
 #endif
