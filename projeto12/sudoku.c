@@ -23,9 +23,9 @@ int lerSudoku(char**matriz,int tam ){
 	for(i=0;i<tam;i++){
 		for(j=0;j<tam;j++){
 			scanf(" %c", &op);
-            if(op == '.')
-                op = '!';
-            matriz[i][j]= op;
+            if(op != '.') 
+                matriz[i][j] =  op;
+
         }
     }
 	return SUCESSO;
@@ -37,6 +37,7 @@ int printSudoku(char** mat,int tam){
 	int i,j;
 	for(i=0;i<tam;i++){
 		for(j=0;j<tam;j++){
+            if(mat[i][j])
 			printf("%c", mat[i][j]);
 		}
 	printf("\n");
@@ -44,7 +45,7 @@ int printSudoku(char** mat,int tam){
 	return SUCESSO;
 }
 
-int quadrado(char**mat,int x,int y,int *vet){
+/*int quadrado(char**mat,int x,int y,int *vet){
     int i,j,num;
 	int flagQuadrado = 15; // seta 16 para todos os flag
 	int posi = (x/4)*4;
@@ -137,11 +138,11 @@ int conferer(char**mat,int x,int y, int *pos){
     flagQuadrado = quadrado(mat,x,y,vet);
 
 	//printf("%d %d %d\n",flagLinha,flagColuna,flagQuadrado);
-	if(flagLinha == 0 || flagColuna == 0 || flagQuadrado == 0){
+	if(flagLinha <= 1 || flagColuna <= 1 || flagQuadrado <= 1){
 		//printf("entrou");
 		// acha o numero com tem a maior possibilidade de ser
 		for(i =0;i<16;i++){
-			if(vet[i] >= index){
+			if(vet[i] > index){
 				index = vet[i];
 				*pos = i;
 			}	
@@ -190,4 +191,78 @@ int Sudoku(char **mat,int tam){
 
 
 	return SUCESSO;
+} */
+
+
+
+char *confere(char**mat,int x, int y, int *pos){
+    int i,j,num=0;
+	int posi = (x/4)*4;
+	int posj = (y/4)*4;
+    int *hashTable= (int*)calloc(128,sizeof(int));
+    char *letra= NULL;
+    char op;
+
+    for(j =0;j< 16;j++){
+        hashTable[(int)mat[x][j]]++; // confere por coluna
+    }
+    for(i =0;i< 16;i++){
+       
+        hashTable[(int)mat[i][y]]++; // confere por linha
+    }
+
+    for(i = posi; i < (posi+4); i++){
+		for(j =posj; j < (posj+4) ;j++){
+           
+			hashTable[(int)mat[i][j]]++;
+		}
+	}
+
+    for(i=48;i<58;i++){
+        if(!hashTable[i]){
+            num++;
+            letra = (char*)realloc(letra,sizeof(char)*num);
+            letra[num-1] = i;
+        }
+    }
+    
+    for(i=65;i<71;i++){
+        if(!hashTable[i]){
+            num++;
+            letra = (char*)realloc(letra,num*sizeof(char));
+            letra[num-1] = i;
+        }
+    }
+
+    *pos = num;
+    return letra;
 }
+
+int Sudoku(char **mat,int tam){
+    if(!mat) return ERRO_MATRIZ;
+    int i,j, quant=1,flag =1;
+    char *novo;
+
+    while(flag++ < 1000){
+
+        //flag = 0;
+		for(i= 0; i <tam;i++){
+			for(j =0; j<tam ;j++){
+				if(!mat[i][j]){
+                   
+                    novo = confere(mat,i,j,&quant);
+                    if(quant == 1){
+                        mat[i][j] == novo[0];
+                        
+                    } 
+                   // flag = 1;
+                }
+	        }	
+
+	    }
+    }
+
+    return SUCESSO;
+}
+
+
